@@ -5,7 +5,7 @@
 
 1. Installer PostgreSQL,
 2. Installer Docker pour host la DB, 
-3. Lancer le conteneur PostgreSQL avec Docker avec la commande: 
+3. Lancer le conteneur PostgreSQL avec Docker avec la commande (dans le terminal): 
 
 ```bash
 docker run --name postgres -e POSTGRES_PASSWORD=helloworld -d -p 5432:5432 postgres
