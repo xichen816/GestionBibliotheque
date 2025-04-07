@@ -28,7 +28,7 @@ Password: helloworld
 A ce stade vous devriez avoir : 
 
 Docker :
-![Docker Image](/public/img/docker.png)
+![Docker Image](/public/img/Docker.png)
 
 Datagrip : 
 ![Datagrip Image](/public/img/DataGrip_properties.png)
