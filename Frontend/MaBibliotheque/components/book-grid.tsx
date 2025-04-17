@@ -1,4 +1,3 @@
-import Link from "next/link"
 import type { Book } from "./../types/types"
 
 interface BookGridProps {
@@ -9,7 +8,7 @@ export default function BookGrid({ books }: BookGridProps) {
     return (
         <div className="book-grid">
             {books.map((book) => (
-                <Link href={`/livre/${book.id}`} key={book.id}>
+                <a href={`/livre/${book.id}`} key={book.id}>
                     <div className="book-card">
                         <div className="book-cover">
                             {book.cover ? (
@@ -27,7 +26,7 @@ export default function BookGrid({ books }: BookGridProps) {
                             <button>Voir détails</button>
                         </div>
                     </div>
-                </Link>
+                </a>
             ))}
         </div>
     )

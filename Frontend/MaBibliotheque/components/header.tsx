@@ -1,27 +1,26 @@
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import "./../src/index.css";
 
 export default function Header() {
-    const pathname = usePathname()
+    const pathname = window.location.pathname;
 
     return (
         <header className="header">
             <div className="container">
                 <div className="header-content">
-                    <div className="logo">Bibliothèque</div>
+                    <div className="logo">MaBibliothèque</div>
                     <nav className="nav">
-                        <Link href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>
+                        <a href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>
                             Accueil
-                        </Link>
-                        <Link href="/commande" className={`nav-link ${pathname === "/commande" ? "active" : ""}`}>
+                        </a>
+                        <a href="/commande" className={`nav-link ${pathname === "/commande" ? "active" : ""}`}>
                             Commander
-                        </Link>
-                        <Link href="/emprunts" className={`nav-link ${pathname === "/emprunts" ? "active" : ""}`}>
+                        </a>
+                        <a href="/emprunts" className={`nav-link ${pathname === "/emprunts" ? "active" : ""}`}>
                             Mes emprunts
-                        </Link>
-                        <Link href="/profil" className={`nav-link ${pathname === "/profil" ? "active" : ""}`}>
+                        </a>
+                        <a href="/profil" className={`nav-link ${pathname === "/profil" ? "active" : ""}`}>
                             Profil
-                        </Link>
+                        </a>
                     </nav>
                 </div>
             </div>

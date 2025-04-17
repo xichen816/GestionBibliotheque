@@ -10,7 +10,7 @@ export interface Book {
     category: string
 }
 
-export interface User {
+export interface Adherent {
     id: number
     name: string
     email: string
