@@ -18,7 +18,7 @@ export default function Profile() {
     return (
         <>
             <Header />
-            <main className="main">
+            <main className="main" id="profil">
                 <div className="container">
                     <h1 className="section-title">Mon Profil</h1>
 
