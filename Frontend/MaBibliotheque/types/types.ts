@@ -11,9 +11,11 @@ export interface Livre {
 }
 
 export interface Adherent {
-    id: number
-    name: string
-    email: string
-    borrowedBooks: number[]
-    orderedBooks: number[]
+    id : string,
+    nom : string,
+    prenom : string,
+    date_naissance : Date,
+    adresse : string,
+    telephone : string,
+    email  : string,
 }

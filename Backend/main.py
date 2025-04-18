@@ -1,49 +1,34 @@
 from typing import Union
 
 from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
+
 from pydantic import BaseModel
 from typing import List, Annotated
-import models
-from database import engine, SessionLocal
+#import models
+from database import Database
 from sqlalchemy.orm import Session
+
+
 
 # ----------- appel de la base de données -----------
 app = FastAPI()
-models.Base.metadata.create_all(bind=engine)
 
-class Bibliotheque(BaseModel):
-    id_bibliotheque: int
-    nb_adherent: int
-    ville: str
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # React dev server
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-class Adherent(BaseModel):
-    id_adherent: int
-    nom: str
-    prenom: str
-    email: str
-    no_rue: str
-    nom_rue: str
-    code_postal: str
-    ville: str
-    province: str
-    id_bibliotheque: int
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-db_dependency = Annotated[Session, Depends(get_db)]
+database = Database()
 
 
 # ---------- endpoints ----------
-@app.get("/")
-
+@app.get("/adherent")
 def read_root():
-    return {"Hello": "World"}
+    return database.show_adherent()
 
 
 @app.get("/items/{item_id}")

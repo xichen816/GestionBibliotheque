@@ -43,6 +43,19 @@ Datagrip :
 pip install psycog2-binary
 ```
 
+### - RUN FastAPI -
+```bash
+uvicorn main:app --reload
+```
+
+### - URL - 
+```text
+postgresql://<user>:<password>@<host>:<port>/<database>
+```
+
+```python
+URL_DATABASE = 'postgresql://postgres:gestionBibliotheque@localhost:5432/postgres'
+```
 
 ## FrontEnd (HTML | CSS | JS): 
 
