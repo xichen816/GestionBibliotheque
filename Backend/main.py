@@ -40,3 +40,15 @@ def question_1():
 @app.get("/question/question2")
 def question_2():
     return database.get_livres_commande_mais_pas_empruntes()
+
+
+# question 3 :
+@app.get("/question/question3")
+def question_3():
+    return database.get_ratio_retard()
+
+
+# question 4 :
+@app.get("/question/question4")
+def question_4():
+    return

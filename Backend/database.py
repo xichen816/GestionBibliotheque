@@ -66,22 +66,20 @@ class Database:
     def get_livres_commande_mais_pas_empruntes(self):
 
         com = []
-        query = text("""
-        SELECT l.id_livre, l.titre, CONCAT(a.prenom, ' ', a.nom) AS auteurs, g.genre AS nom_genre
-        FROM Livre l
-        JOIN Livre_Auteur la ON l.id_livre = la.id_livre
-        JOIN Auteur a ON la.id_auteur = a.id_auteur
-        JOIN Genre g ON l.genre = g.genre
-        WHERE l.id_livre IN (
-            SELECT c.id_livre
-            FROM Commande c
-            WHERE c.id_livre NOT IN (
-                SELECT e.id_livre
-                FROM Emprunt e
-            )
-);
-
-    """)
+        query = (text("""
+            SELECT l.id_livre, l.titre, CONCAT(a.prenom, ' ', a.nom) AS auteurs, g.genre AS nom_genre
+            FROM Livre l
+            JOIN Livre_Auteur la ON l.id_livre = la.id_livre
+            JOIN Auteur a ON la.id_auteur = a.id_auteur
+            JOIN Genre g ON l.genre = g.genre
+            WHERE l.id_livre IN (
+                SELECT c.id_livre
+                FROM Commande c
+                WHERE c.id_livre NOT IN (
+                    SELECT e.id_livre
+                    FROM Emprunt e
+                )
+            ); """))
 
         with self.engine.connect() as conn:
             result = conn.execute(query)
@@ -95,3 +93,56 @@ class Database:
                     }
                 )
             return com
+
+    def get_ratio_retard(self):
+        ratio = []
+
+        query = (text("""
+        WITH emprunts_total AS (
+        SELECT
+            a.id_adherent,
+            a.nom,
+            a.prenom,
+            a.email,
+            COUNT(*) AS total_emprunts
+        FROM emprunt e
+        JOIN adherent a ON e.id_adherent = a.id_adherent
+        GROUP BY a.id_adherent, a.nom, a.prenom, a.email
+        ),
+        emprunts_retard AS (
+            SELECT
+                a.id_adherent,
+                COUNT(*) AS nb_retard
+            FROM emprunt e
+            JOIN adherent a ON e.id_adherent = a.id_adherent
+            WHERE e.statut_emprunt = 'en retard'
+            GROUP BY a.id_adherent
+        )
+        
+        SELECT
+            t.nom,
+            t.prenom,
+            t.email,
+            r.nb_retard,
+            t.total_emprunts,
+            ROUND(CAST(r.nb_retard AS numeric) / t.total_emprunts * 100, 2) AS ratio_retard_percent
+        FROM emprunts_total t
+        JOIN emprunts_retard r ON t.id_adherent = r.id_adherent
+        WHERE CAST(r.nb_retard AS float) / t.total_emprunts > 0.05;
+        """))
+
+        with self.engine.connect() as conn:
+            result = conn.execute(query)
+            for row in result :
+                ratio.append(
+                    {
+                        "nom": row[0],
+                        "prenom": row[1],
+                        "email": row[2],
+                        "nb_retard": row[3],
+                        "total_emprunts": row[4],
+                        "ratio_retard_percent": row[5]
+                    }
+                )
+            print(ratio)
+            return ratio
