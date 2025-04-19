@@ -30,7 +30,13 @@ database = Database()
 def read_root():
     return database.show_adherent()
 
+# question 1 : Quels livres ont été commandés par des adhérents mais jamais empruntés par personne?
+@app.get("/question/question1")
+def question_1():
+    return database.get_active_emprunts()
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+
+# question 2 : Quels sont les livres actuellement empruntés et non retournés ?
+@app.get("/question/question2")
+def question_2():
+    return database.get_livres_commande_mais_pas_empruntes()
