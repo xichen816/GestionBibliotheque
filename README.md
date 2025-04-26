@@ -373,6 +373,13 @@ FROM emprunts_total t
 JOIN emprunts_retard r ON t.id_adherent = r.id_adherent
 WHERE CAST(r.nb_retard AS float) / t.total_emprunts > 0.1;
 
+SELECT E.no_exemplaire, L.titre
+FROM Emprunt E
+    JOIN Livre L ON E.id_livre = L.id_livre
+WHERE E.id_adherent = '1'
+  AND E.statut_emprunt = 'en_cours'
+  AND E.date_debut <= CURRENT_DATE - INTERVAL '21 days';
+
 ```
 
 ## BackEnd (Python | FastAPI): 
