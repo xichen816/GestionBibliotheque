@@ -371,7 +371,7 @@ SELECT
     ROUND(CAST(r.nb_retard AS numeric) / t.total_emprunts * 100, 2) AS ratio_retard_percent
 FROM emprunts_total t
 JOIN emprunts_retard r ON t.id_adherent = r.id_adherent
-WHERE CAST(r.nb_retard AS float) / t.total_emprunts > 0.05;
+WHERE CAST(r.nb_retard AS float) / t.total_emprunts > 0.1;
 
 ```
 

@@ -1,13 +1,6 @@
-from typing import Union
-
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
-
-from pydantic import BaseModel
-from typing import List, Annotated
-#import models
 from database import Database
-from sqlalchemy.orm import Session
 
 
 
@@ -51,4 +44,4 @@ def question_3():
 # question 4 :
 @app.get("/question/question4")
 def question_4():
-    return
+    return database.get_retard_10jours()
