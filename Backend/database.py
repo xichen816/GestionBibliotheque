@@ -1,4 +1,3 @@
-from fastapi import params
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -128,7 +127,7 @@ class Database:
             ROUND(CAST(r.nb_retard AS numeric) / t.total_emprunts * 100, 2) AS ratio_retard_percent
         FROM emprunts_total t
         JOIN emprunts_retard r ON t.id_adherent = r.id_adherent
-        WHERE CAST(r.nb_retard AS float) / t.total_emprunts > 0.05;
+        WHERE CAST(r.nb_retard AS float) / t.total_emprunts > 0.1;
         """))
 
         with self.engine.connect() as conn:
@@ -144,5 +143,26 @@ class Database:
                         "ratio_retard_percent": row[5]
                     }
                 )
-            print(ratio)
             return ratio
+
+    def get_retard_10jours(self):
+        resultat = []
+
+        query = (text("""
+        SELECT E.no_exemplaire, L.titre
+        FROM Emprunt E
+        JOIN Livre L ON E.id_livre = L.id_livre
+        WHERE E.id_adherent = '1'
+            AND E.statut_emprunt = 'en_cours'
+            AND E.date_emprunt <= CURRENT_DATE - INTERVAL '21 days';
+        """))
+
+        with self.engine.connect() as conn:
+            data = conn.execute(query)
+            for row in data :
+                resultat.append({
+                    "no_exemplaire" : row[0],
+                    "id_livre" : row[1]
+                })
+
+            return resultat

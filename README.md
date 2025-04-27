@@ -100,7 +100,7 @@ CREATE TABLE Emprunt (
     id_emprunt INT PRIMARY KEY,
     id_adherent INT NOT NULL,
     date_debut DATE NOT NULL,
-    date_fin DATE,
+    date_retour DATE,
     statut_emprunt VARCHAR(50),
     no_exemplaire INT NOT NULL,
     id_livre INT NOT NULL,
@@ -231,27 +231,27 @@ INSERT INTO Statut_Commande (statut_commande) VALUES
 ('honorée');
 
 
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES (1, 1, '2025-03-01', null, 'en cours', 1, 1);
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES (2, 2, '2025-03-05', null, 'en cours', 2, 2);
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES (3, 3, '2025-03-10', null, 'en cours', 1, 3);
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES (4, 4, '2025-03-15', '2025-03-30', 'rendu', 1, 4);
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES (5, 5, '2025-03-20', '2025-04-02', 'rendu', 1, 5);
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES (6, 6, '2025-03-22', '2025-04-01', 'rendu', 1, 6);
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES (7, 7, '2025-03-25', '2025-04-05', 'rendu', 1, 7);
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES (8, 8, '2025-03-28', '2025-05-10', 'en retard', 1, 8);
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES (9, 9, '2025-04-01', '2025-04-11', 'rendu', 1, 9);
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES (10, 10, '2025-04-05', '2025-04-28', 'en retard', 1, 10);
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES (1, 1, '2025-03-01', null, 'en cours', 1, 1);
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES (2, 2, '2025-03-05', null, 'en cours', 2, 2);
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES (3, 3, '2025-03-10', null, 'en cours', 1, 3);
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES (4, 4, '2025-03-15', '2025-03-30', 'rendu', 1, 4);
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES (5, 5, '2025-03-20', '2025-04-02', 'rendu', 1, 5);
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES (6, 6, '2025-03-22', '2025-04-01', 'rendu', 1, 6);
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES (7, 7, '2025-03-25', '2025-04-05', 'rendu', 1, 7);
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES (8, 8, '2025-03-28', '2025-05-10', 'en retard', 1, 8);
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES (9, 9, '2025-04-01', '2025-04-11', 'rendu', 1, 9);
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES (10, 10, '2025-04-05', '2025-04-28', 'en retard', 1, 10);
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES
 (11, 4, '2025-04-15', '2025-04-21', 'rendu', 2, 10),
 (12, 5, '2025-03-25', '2025-04-09', 'en retard', 1, 14),
 (13, 6, '2025-04-10', null, 'en cours', 3, 10);
 
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES
 (14, 6, '2024-07-10', '2024-07-22', 'rendu', 3, 6),
 (15, 6, '2024-09-10', '2025-09-15', 'rendu', 4, 6),
 (16, 6, '2025-03-10', '2025-03-21', 'rendu', 5, 6);
 
-INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_fin, statut_emprunt, no_exemplaire, id_livre) VALUES
+INSERT INTO Emprunt(id_emprunt, id_adherent, date_debut, date_retour, statut_emprunt, no_exemplaire, id_livre) VALUES
 (17, 6, '2025-05-10', '2024-05-30', 'en retard', 1, 6);
 
 INSERT INTO Commande(id_commande, id_adherent, statut_commande, id_livre) VALUES (1, 1, 'honorée', 1);
@@ -327,11 +327,18 @@ WHERE l.id_livre IN (
     )
 );
 
-SELECT l.titre, a.prenom, a.nom, e.date_debut, e.date_fin
+SELECT l.titre, a.prenom, a.nom, e.date_debut, e.date_retour
 FROM Emprunt e
 JOIN Livre l ON e.id_livre = l.id_livre
 JOIN Adherent a ON e.id_adherent = a.id_adherent
 WHERE e.statut_emprunt != 'rendu';
+
+SELECT E.no_exemplaire, L.titre
+FROM Emprunt E
+JOIN Livre L ON E.id_livre = L.id_livre
+WHERE E.statut_emprunt = 'en_cours'
+  AND E.date_retour IS NOT NULL
+  AND E.date_debut <= CURRENT_DATE - INTERVAL '21 days';
 
 
 WITH emprunts_total AS (
@@ -364,7 +371,7 @@ SELECT
     ROUND(CAST(r.nb_retard AS numeric) / t.total_emprunts * 100, 2) AS ratio_retard_percent
 FROM emprunts_total t
 JOIN emprunts_retard r ON t.id_adherent = r.id_adherent
-WHERE CAST(r.nb_retard AS float) / t.total_emprunts > 0.05;
+WHERE CAST(r.nb_retard AS float) / t.total_emprunts > 0.1;
 
 SELECT E.no_exemplaire, L.titre
 FROM Emprunt E
@@ -383,9 +390,10 @@ WHERE E.id_adherent = '1'
 pip install psycog2-binary
 ```
 
-### - RUN FastAPI -
+### - RUN FastAPI - 
+
 ```bash
-uvicorn main:app --reload
+cd Backend; uvicorn main:app --reload
 ```
 
 ### - URL - 
@@ -397,8 +405,10 @@ postgresql://<user>:<password>@<host>:<port>/<database>
 URL_DATABASE = 'postgresql://postgres:gestionBibliotheque@localhost:5432/postgres'
 ```
 
-## FrontEnd (HTML | CSS | JS): 
+## FrontEnd: 
 
-Classique, pas de framework, pas de librairies, juste du HTML, CSS et JS.
+### - RUN FrontEnd -
 
-Il faut que vous ajoutiez les reponses de vos questions.
+```bash
+cd Frontend/MaBibliotheque; npm run dev
+```
