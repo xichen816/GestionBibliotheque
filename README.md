@@ -216,11 +216,6 @@ INSERT INTO Exemplaire(id_livre, no_exemplaire, disponibilite) VALUES
 
 (14, 1, TRUE);
 
-insert into Exemplaire(id_livre, no_exemplaire, disponibilite) values
-(6, 3, TRUE),
-(6, 4, TRUE),
-(6, 5, TRUE);
-
 INSERT INTO Statut_Emprunt (statut_emprunt) VALUES
 ('rendu'),
 ('en cours'),
