@@ -44,4 +44,4 @@ def question_3():
 # question 4 :
 @app.get("/question/question4")
 def question_4():
-    return database.get_retard_10jours()
+    return database.get_retard_une_semaine_etplus()

@@ -333,14 +333,6 @@ JOIN Livre l ON e.id_livre = l.id_livre
 JOIN Adherent a ON e.id_adherent = a.id_adherent
 WHERE e.statut_emprunt != 'rendu';
 
-SELECT E.no_exemplaire, L.titre
-FROM Emprunt E
-JOIN Livre L ON E.id_livre = L.id_livre
-WHERE E.statut_emprunt = 'en_cours'
-  AND E.date_retour IS NOT NULL
-  AND E.date_debut <= CURRENT_DATE - INTERVAL '21 days';
-
-
 WITH emprunts_total AS (
     SELECT
         a.id_adherent,
@@ -373,11 +365,10 @@ FROM emprunts_total t
 JOIN emprunts_retard r ON t.id_adherent = r.id_adherent
 WHERE CAST(r.nb_retard AS float) / t.total_emprunts > 0.1;
 
-SELECT E.no_exemplaire, L.titre
+SELECT E.no_exemplaire, L.titre, E.id_adherent
 FROM Emprunt E
     JOIN Livre L ON E.id_livre = L.id_livre
-WHERE E.id_adherent = '1'
-  AND E.statut_emprunt = 'en_cours'
+WHERE E.statut_emprunt = 'en cours'
   AND E.date_debut <= CURRENT_DATE - INTERVAL '21 days';
 
 ```

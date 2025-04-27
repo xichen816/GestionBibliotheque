@@ -43,7 +43,7 @@ class Database:
 
         with self.engine.connect() as conn:
             data = conn.execute(text(
-                "SELECT l.titre, a.prenom, a.nom, e.date_debut, e.date_fin "
+                "SELECT l.titre, a.prenom, a.nom, e.date_debut, e.date_retour "
                 "FROM Emprunt e "
                 "JOIN Livre l ON e.id_livre = l.id_livre "
                 "JOIN Adherent a ON e.id_adherent = a.id_adherent "
@@ -145,24 +145,24 @@ class Database:
                 )
             return ratio
 
-    def get_retard_10jours(self):
+    def get_retard_une_semaine_etplus(self):
         resultat = []
 
         query = (text("""
-        SELECT E.no_exemplaire, L.titre
+        SELECT E.no_exemplaire, L.titre, E.id_adherent
         FROM Emprunt E
         JOIN Livre L ON E.id_livre = L.id_livre
-        WHERE E.id_adherent = '1'
-            AND E.statut_emprunt = 'en_cours'
-            AND E.date_emprunt <= CURRENT_DATE - INTERVAL '21 days';
+        WHERE E.statut_emprunt = 'en cours'
+            AND E.date_debut<= CURRENT_DATE - INTERVAL '21 days';
         """))
 
         with self.engine.connect() as conn:
             data = conn.execute(query)
             for row in data :
                 resultat.append({
-                    "no_exemplaire" : row[0],
-                    "id_livre" : row[1]
+                    "no_exemplaire": row[0],
+                    "titre_livre": row[1],
+                    "id_adherent": row[2]
                 })
 
             return resultat
